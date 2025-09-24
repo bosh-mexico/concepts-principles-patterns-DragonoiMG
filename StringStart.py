@@ -1,4 +1,4 @@
-def check_names_star_char(names: list, start_char) -> list : 
+def check_names_start_char(names: list, start_char) -> list : 
     if not names:
         return []
     

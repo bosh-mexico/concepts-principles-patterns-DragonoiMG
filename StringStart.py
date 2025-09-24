@@ -1,14 +1,14 @@
 from typing import List, Callable
 
-def starts_with_character(target_char: str, case_sensitive: bool = True) -> Callable[[str], bool]:
+def check_character(target_char: str, position: int, case_sensitive: bool = True) -> Callable[[str], bool]:
     def predicate(text: str) -> bool:
         if not text:
             return False
         
         if case_sensitive:
-            return text[0] == target_char
+            return text[position] == target_char
         else:
-            return text[0].lower() == target_char.lower()
+            return text[position].lower() == target_char.lower()
     
     return predicate
 
@@ -27,4 +27,4 @@ def filter_strings(source: list, predicate) -> list:
 
 if __name__ == "__main__":
     list_of_names = ["Bosch", "Mexico", "Mango", "Mark", "Blr", "Clean code"]
-    print(filter_strings(list_of_names, starts_with_character('m', case_sensitive=False)))
+    print(filter_strings(list_of_names, check_character('m', position=0, case_sensitive=False)))

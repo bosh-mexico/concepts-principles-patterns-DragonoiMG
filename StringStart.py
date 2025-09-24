@@ -13,4 +13,4 @@ def check_names_start_char(names: list, start_char) -> list :
 
 if __name__ == "__main__":
     list_of_names = ["Bosch", "Mexico", "Mango", "Mark", "Blr", "Clean code"]
-    print(check_names_star_char(list_of_names, "m"))
+    print(check_names_start_char(list_of_names, "m"))

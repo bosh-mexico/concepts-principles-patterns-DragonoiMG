@@ -1,18 +1,17 @@
 from typing import List, Callable
 
-def check_character(target_char: str, position: int, case_sensitive: bool = True) -> Callable[[str], bool]:
-    def predicate(text: str) -> bool:
-        if not text:
-            return False
-        
-        if case_sensitive:
-            return text[position] == target_char
-        else:
-            return text[position].lower() == target_char.lower()
+def character_matches_at_position(text: str, target_char: str, position: int, case_sensitive: bool = True) -> bool:
+    """Check if character at position matches target character."""
+    if not text or len(text) <= position:
+        return False
     
-    return predicate
+    if case_sensitive:
+        return text[position] == target_char
+    else:
+        return text[position].lower() == target_char.lower()
 
-def filter_strings(source: list, predicate) -> list:
+
+def filter_items(source: list, predicate) -> list:
     if not source:
         return []
 
@@ -27,4 +26,4 @@ def filter_strings(source: list, predicate) -> list:
 
 if __name__ == "__main__":
     list_of_names = ["Bosch", "Mexico", "Mango", "Mark", "Blr", "Clean code"]
-    print(filter_strings(list_of_names, check_character('m', position=0, case_sensitive=False)))
+    print(filter_items(list_of_names, lambda name: character_matches_at_position(name, 'M', 0, case_sensitive=True)))

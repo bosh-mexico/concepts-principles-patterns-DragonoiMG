@@ -1,4 +1,4 @@
-from typing import List, Callable
+from typing import Callable, Any
 
 def character_matches_at_position(text: str, target_char: str, position: int, case_sensitive: bool = True) -> bool:
     """Check if character at position matches target character."""
@@ -11,7 +11,7 @@ def character_matches_at_position(text: str, target_char: str, position: int, ca
         return text[position].lower() == target_char.lower()
 
 
-def filter_items(source: list, predicate) -> list:
+def filter_items(source: list, predicate: Callable[[Any], bool]) -> list:
     if not source:
         return []
 

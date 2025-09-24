@@ -1,16 +1,30 @@
-def check_names_start_char(names: list, start_char) -> list : 
-    if not names:
-        return []
-    
-    selected_strings = []
-    
-    for name in names:
-        if name[0].lower() == start_char.lower():
-            selected_strings.append(name)
+from typing import List, Callable
 
-    return selected_strings
+def starts_with_character(target_char: str, case_sensitive: bool = True) -> Callable[[str], bool]:
+    def predicate(text: str) -> bool:
+        if not text:
+            return False
+        
+        if case_sensitive:
+            return text[0] == target_char
+        else:
+            return text[0].lower() == target_char.lower()
+    
+    return predicate
+
+def filter_strings(source: list, predicate) -> list:
+    if not source:
+        return []
+
+    filtered_items = []
+
+    for item in source:
+        if predicate(item):
+            filtered_items.append(item)
+
+    return filtered_items
 
 
 if __name__ == "__main__":
     list_of_names = ["Bosch", "Mexico", "Mango", "Mark", "Blr", "Clean code"]
-    print(check_names_start_char(list_of_names, "m"))
+    print(filter_strings(list_of_names, starts_with_character('m', case_sensitive=False)))
